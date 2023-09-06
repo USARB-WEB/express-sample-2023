@@ -1,0 +1,30 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/students": {
+            "get": {
+                "x-swagger-router-controller": "home",
+                "operationId": "index",
+                "tags": [
+                    "USARB admission"
+                ],
+                "description": "[Return a list of students](https://docs.google.com/document/d/1drhy7uHkpE3G9pa9L0GLT9MpVotlFC4WJXtKV1Arqyk/edit?usp=sharing)",
+                "responses": {
+                    "200": {
+                        "description": "A list of students.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/pet"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

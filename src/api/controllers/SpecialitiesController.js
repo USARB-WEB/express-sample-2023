@@ -4,18 +4,8 @@ let counter = 1;
 
 class SpecialitiesController {
    
-    async getList(request, response) {
-        console.log('before')
-        let items = [];
-        try{
-            items = await db.query("SELECT * FROM specialities")
-        }catch(e){
-            console.log(e)
-        }
-        console.log('after')
-        
-        console.log(items)
-        return items
+    getList(request, response) {
+        response.send(items)
     }
 
     getOne(request, response) {

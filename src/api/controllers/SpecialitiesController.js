@@ -1,11 +1,21 @@
+const db = require('../../db/query')
 const items = [];
 let counter = 1;
 
 class SpecialitiesController {
    
-    getList(request, response) {
+    async getList(request, response) {
+        console.log('before')
+        let items = [];
+        try{
+            items = await db.query("SELECT * FROM specialities")
+        }catch(e){
+            console.log(e)
+        }
+        console.log('after')
+        
         console.log(items)
-        response.send(items)
+        return items
     }
 
     getOne(request, response) {

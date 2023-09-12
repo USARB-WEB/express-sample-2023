@@ -8,6 +8,6 @@ router.get('/:id', studentsController.getOne)
 router.post('/', studentsController.create)
 router.delete('/:id', studentsController.delete)
 router.put('/:id', studentsController.update)
-router.patch('/:id', studentsController.enrole)
+//router.patch('/:id', studentsController.enrole)
 
 module.exports = router

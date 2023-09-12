@@ -1,15 +1,19 @@
-const db = require('../../db/query')
 const items = [];
 let counter = 1;
+const specialitiesService = require('../services/SpecialitiesService')
 
 class SpecialitiesController {
-   
-    getList(request, response) {
-        response.send(items)
+
+    async getList(request, response) {
+        try{
+            response.send(await specialitiesService.getList())
+        }catch(e){
+            response.send(e);
+        }
     }
 
-    getOne(request, response) {
-        const item = items.find(item => Number(request.params.id) === item.id)
+    async getOne(request, response) {
+        const item = await specialitiesService.getOne(Number(request.params.id))
         if (item) {
             response.send(item)
         } else {
@@ -18,30 +22,16 @@ class SpecialitiesController {
         }
     }
 
-    create(request, response) {
-        const item = request.body
-        item.id = counter++;
-        items.push(item);
-        response.send(request.body)
+    async create(request, response) {
+        response.send(await specialitiesService.create(request.body))
     }
 
-    delete(request, response) {
-        const itemIndex = items.findIndex(item => item.id === Number(request.params.id))
-        items.splice(itemIndex, 1);
-        response.send()
+    async delete(request, response) {
+        response.send(specialitiesService.delete(Number(request.params.id)))
     }
 
-    update(request, response) {
-        const itemIndex = items.findIndex(item => item.id === Number(request.params.id))
-        const item = request.body;
-        item.id = Number(request.params.id)
-        items.splice(itemIndex, 1, item)
-        if (itemIndex < 0) {
-            response.statusCode = 404
-            response.send()
-        } else {
-            response.send(items[itemIndex])
-        }
+    async update(request, response) {
+        response.send(await specialitiesService.update(request.body, Number(request.params.id)))
     }
 }
 
